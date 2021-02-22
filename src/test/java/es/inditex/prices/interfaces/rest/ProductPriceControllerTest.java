@@ -31,7 +31,7 @@ public class ProductPriceControllerTest {
 
     @ParameterizedTest
     @MethodSource("testParameterProvisioner")
-    public void testFindPrice_shouldReturnPrice(long brand, long product, LocalDateTime date, long expectedPriceList) {
+    public void whenGetProductPrice_thenShouldReturnExpectedProductPrice(long brand, long product, LocalDateTime date, long expectedPriceList) {
         PriceDTO price = controller.getProductPrice(brand, product, date);
         assertEquals(price.getPriceList(), expectedPriceList);
     }
