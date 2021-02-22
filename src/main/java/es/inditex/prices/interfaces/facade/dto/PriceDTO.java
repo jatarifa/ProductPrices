@@ -2,10 +2,12 @@ package es.inditex.prices.interfaces.facade.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode
 public class PriceDTO {
     @Getter
     private final Long brand;
