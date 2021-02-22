@@ -12,11 +12,11 @@ import java.util.List;
 
 @Repository
 public class ProductPriceRepositoryH2 implements ProductPriceRepository {
-    private static final String FIND_ALL = "select * from prices where" +
-            "   product_id = ?" +
-            "   and brand_id = ?" +
-            "   and start_date <= ?" +
-            "   and end_date >= ?";
+    private static final String FIND_ALL =  "select * from prices where" +
+                                            "   product_id = ?" +
+                                            "   and brand_id = ?" +
+                                            "   and start_date <= ?" +
+                                            "   and end_date >= ?";
 
     private final JdbcTemplate jdbcTemplate;
 
