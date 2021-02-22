@@ -35,7 +35,7 @@ public class ProductPriceServiceFacadeTest {
         PriceDTO price = service.getProductPriceForDate(1L, 1L, LocalDateTime.now());
         // assert
         assertNotNull(price);
-        assertTrue(price.equals(expectedResultPrice));
+        assertEquals(price, expectedResultPrice);
     }
 
     @Test
