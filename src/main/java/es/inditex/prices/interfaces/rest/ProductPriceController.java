@@ -2,6 +2,8 @@ package es.inditex.prices.interfaces.rest;
 
 import es.inditex.prices.interfaces.facade.ProductPriceServiceFacade;
 import es.inditex.prices.interfaces.facade.dto.PriceDTO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,12 +23,13 @@ public class ProductPriceController {
     }
 
     @GetMapping("/{brandId}/{productId}")
-    public PriceDTO getProductPrice(@PathVariable final Long brandId,
-                                    @PathVariable final Long productId,
-                                    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
-        if (date == null)
-            date = LocalDateTime.now();
-
+    @ApiOperation(value = "Get Product Price for a date")
+    public PriceDTO getProductPrice(@ApiParam(name = "brandId", type = "Long", value = "Brand identifier", example = "1", required = true)
+                                        @PathVariable final Long brandId,
+                                    @ApiParam(name = "productId", type = "Long", value = "Product identifier", example = "35455", required = true)
+                                        @PathVariable final Long productId,
+                                    @ApiParam(name = "date", type = "Timestamp", value = "ISO 8601 date to get prices", example = "2020-06-14T10:00:00", required = true)
+                                        @RequestParam(required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         log.info("REST call with Brand: {}, Product: {}, Date: {}", brandId, productId, date);
         return productPriceServiceFacade.getProductPriceForDate(brandId, productId, date);
     }

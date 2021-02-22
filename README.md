@@ -10,7 +10,7 @@ mvn verify
 mvn spring-boot:run
 ```
 
-### Swagger documentation
+### API documentation
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
