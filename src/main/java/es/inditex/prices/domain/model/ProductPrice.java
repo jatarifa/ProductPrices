@@ -18,7 +18,7 @@ public class ProductPrice {
     @Getter
     private final Validity validity;
 
-    public ProductPrice(Long priceList, Long brandId, Long productId, Long priority, Price price, Validity validity) {
+    ProductPrice(Long priceList, Long brandId, Long productId, Long priority, Price price, Validity validity) {
         this.priceList = priceList;
         this.brandId = brandId;
         this.productId = productId;
