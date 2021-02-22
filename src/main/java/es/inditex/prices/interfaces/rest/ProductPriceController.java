@@ -28,8 +28,7 @@ public class ProductPriceController {
     @GetMapping("/{brandId}/{productId}")
     public PriceDTO getProductPrice(@PathVariable final Long brandId,
                                     @PathVariable final Long productId, 
-                                    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date)
-            throws ProductPriceNotFoundException {
+                                    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         if (date == null)
             date = LocalDateTime.now();
 
