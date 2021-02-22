@@ -1,21 +1,19 @@
-# Test and run
+# Product Prices Service
 
 ### Execute tests
 ```
 mvn verify
 ```
 
-### Run project in http://localhost:8080
+### Run project
 ```
 mvn spring-boot:run
 ```
 
-### Run project in http://localhost:8080
+### Swagger documentation
 ```
+http://localhost:8080/swagger-ui/index.html
 ```
-
-### Notes
-- Enhance API documentation with Swagger
 
 
 
