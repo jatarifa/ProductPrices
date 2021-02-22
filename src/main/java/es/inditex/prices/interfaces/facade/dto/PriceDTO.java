@@ -1,22 +1,29 @@
 package es.inditex.prices.interfaces.facade.dto;
 
-import java.time.LocalDateTime;
-import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Getter;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 public class PriceDTO {
-    @Getter private Long brand;
-    @Getter private Long product;
-    @Getter private Long priceList;
+    @Getter
+    private final Long brand;
+    @Getter
+    private final Long product;
+    @Getter
+    private final Long priceList;
     @JsonFormat(pattern = "yyyy/MM/dd'T'HH:mm:ss")
-    @Getter private LocalDateTime from;
+    @Getter
+    private final LocalDateTime from;
     @JsonFormat(pattern = "yyyy/MM/dd'T'HH:mm:ss")
-    @Getter private LocalDateTime to;
-    @Getter private BigDecimal price;
-    @Getter private String currency;
-    
+    @Getter
+    private final LocalDateTime to;
+    @Getter
+    private final BigDecimal price;
+    @Getter
+    private final String currency;
+
     public PriceDTO(Long brand, Long product, Long priceList, LocalDateTime from, LocalDateTime to, BigDecimal price, String currency) {
         this.brand = brand;
         this.product = product;

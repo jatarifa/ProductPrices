@@ -1,16 +1,14 @@
 package es.inditex.prices.application.impl;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Service;
-
+import es.inditex.prices.application.ProductPriceService;
 import es.inditex.prices.domain.model.ProductPrice;
 import es.inditex.prices.domain.model.ProductPriceRepository;
-import es.inditex.prices.application.ProductPriceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ProductPriceServiceImpl implements ProductPriceService {
@@ -35,7 +33,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
     private ProductPrice selectProductPriceWithHighestPriority(List<ProductPrice> prices) {
         ProductPrice tmpProductPrice = null;
-        for (ProductPrice productPrice: prices) {
+        for (ProductPrice productPrice : prices) {
             if (tmpProductPrice == null || tmpProductPrice.getPriority() <= productPrice.getPriority())
                 tmpProductPrice = productPrice;
         }

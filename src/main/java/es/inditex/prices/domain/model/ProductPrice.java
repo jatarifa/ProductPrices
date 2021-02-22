@@ -5,12 +5,18 @@ import lombok.ToString;
 
 @ToString
 public class ProductPrice {
-    @Getter private Long priceList;
-    @Getter private Long brandId;
-    @Getter private Long productId;
-    @Getter private Long priority;
-    @Getter private Price price;
-    @Getter private Validity validity;
+    @Getter
+    private final Long priceList;
+    @Getter
+    private final Long brandId;
+    @Getter
+    private final Long productId;
+    @Getter
+    private final Long priority;
+    @Getter
+    private final Price price;
+    @Getter
+    private final Validity validity;
 
     public ProductPrice(Long priceList, Long brandId, Long productId, Long priority, Price price, Validity validity) {
         this.priceList = priceList;
@@ -18,7 +24,7 @@ public class ProductPrice {
         this.productId = productId;
         this.priority = priority;
         this.price = price;
-        this.validity = validity;  
+        this.validity = validity;
     }
 }
  
