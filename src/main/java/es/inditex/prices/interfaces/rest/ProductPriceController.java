@@ -2,6 +2,8 @@ package es.inditex.prices.interfaces.rest;
 
 import es.inditex.prices.interfaces.facade.ProductPriceServiceFacade;
 import es.inditex.prices.interfaces.facade.dto.PriceDTO;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -24,6 +26,11 @@ public class ProductPriceController {
 
     @GetMapping("/{brandId}/{productId}")
     @ApiOperation(value = "Get Product Price for a date")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Price found"),
+        @ApiResponse(code = 404, message = "Price not found"),
+        @ApiResponse(code = 400, message = "Invalid message format"),
+    })
     public PriceDTO getProductPrice(@ApiParam(name = "brandId", type = "Long", value = "Brand identifier", example = "1", required = true)
                                         @PathVariable final Long brandId,
                                     @ApiParam(name = "productId", type = "Long", value = "Product identifier", example = "35455", required = true)
