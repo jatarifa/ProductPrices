@@ -23,8 +23,8 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     }
 
     @Override
-    public ProductPrice getByIdAndBrandForDate(Long id, Long brand, LocalDateTime date) {
-        List<ProductPrice> prices = productPriceRepository.findAllPricesByIdAndBrandForDate(id, brand, date);
+    public ProductPrice getEffectiveProductPriceForDate(Long brand, Long product, LocalDateTime date) {
+        List<ProductPrice> prices = productPriceRepository.findAllProductPricesForDate(brand, product, date);
         log.info("DB returned prices: {}", prices);
 
         if (prices == null || prices.isEmpty())

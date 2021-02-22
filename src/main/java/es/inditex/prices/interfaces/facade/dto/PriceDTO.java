@@ -9,7 +9,7 @@ import lombok.Getter;
 public class PriceDTO {
     @Getter private Long brand;
     @Getter private Long product;
-    @Getter private Long priceId;
+    @Getter private Long priceList;
     @JsonFormat(pattern = "yyyy/MM/dd'T'HH:mm:ss")
     @Getter private LocalDateTime from;
     @JsonFormat(pattern = "yyyy/MM/dd'T'HH:mm:ss")
@@ -17,10 +17,10 @@ public class PriceDTO {
     @Getter private BigDecimal price;
     @Getter private String currency;
     
-    public PriceDTO(Long brand, Long product, Long priceId, LocalDateTime from, LocalDateTime to, BigDecimal price, String currency) {
+    public PriceDTO(Long brand, Long product, Long priceList, LocalDateTime from, LocalDateTime to, BigDecimal price, String currency) {
         this.brand = brand;
         this.product = product;
-        this.priceId = priceId;
+        this.priceList = priceList;
         this.from = from;
         this.to = to;
         this.price = price;

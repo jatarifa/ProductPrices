@@ -34,6 +34,6 @@ public class ProductPriceController {
             date = LocalDateTime.now();
 
         log.info("REST call with Brand: {}, Product: {}, Date: {}", brandId, productId, date);
-        return productPriceServiceFacade.getPriceForBrandAndProductAndDate(brandId, productId, date);
+        return productPriceServiceFacade.getProductPriceForDate(brandId, productId, date);
     }
 }

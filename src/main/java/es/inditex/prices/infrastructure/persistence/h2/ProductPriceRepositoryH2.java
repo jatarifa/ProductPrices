@@ -29,8 +29,8 @@ public class ProductPriceRepositoryH2 implements ProductPriceRepository {
 	}
 
 	@Override
-	public List<ProductPrice> findAllPricesByIdAndBrandForDate(Long id, Long brand, LocalDateTime date) {
-		return jdbcTemplate.query(FIND_ALL, new Object[] { id, brand, date, date }, (rs, rowNum) -> {
+	public List<ProductPrice> findAllProductPricesForDate(Long brand, Long product, LocalDateTime date) {
+		return jdbcTemplate.query(FIND_ALL, new Object[] { product, brand, date, date }, (rs, rowNum) -> {
 			Long price_list = rs.getLong("price_list");
 			Long brand_id = rs.getLong("brand_id");
 			Long product_id = rs.getLong("product_id");

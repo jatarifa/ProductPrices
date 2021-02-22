@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProductPriceRepository {
-    List<ProductPrice> findAllPricesByIdAndBrandForDate(Long id, Long brand, LocalDateTime date);
+    List<ProductPrice> findAllProductPricesForDate(Long brand, Long product, LocalDateTime date);
 }

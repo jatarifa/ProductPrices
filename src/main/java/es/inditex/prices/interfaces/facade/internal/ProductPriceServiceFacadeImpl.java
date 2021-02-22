@@ -20,8 +20,8 @@ public class ProductPriceServiceFacadeImpl implements ProductPriceServiceFacade 
     }
 
     @Override
-    public PriceDTO getPriceForBrandAndProductAndDate(Long brand, Long product, LocalDateTime date) throws ProductPriceNotFoundException {
-        ProductPrice price = productPriceService.getByIdAndBrandForDate(product, brand, date);
+    public PriceDTO getProductPriceForDate(Long brand, Long product, LocalDateTime date) throws ProductPriceNotFoundException {
+        ProductPrice price = productPriceService.getEffectiveProductPriceForDate(brand, product, date);
         if (price == null)
             throw new ProductPriceNotFoundException("Price not found");
 
