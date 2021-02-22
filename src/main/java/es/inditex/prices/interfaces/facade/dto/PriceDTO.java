@@ -15,10 +15,10 @@ public class PriceDTO {
     private final Long product;
     @Getter
     private final Long priceList;
-    @JsonFormat(pattern = "yyyy/MM/dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Getter
     private final LocalDateTime from;
-    @JsonFormat(pattern = "yyyy/MM/dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Getter
     private final LocalDateTime to;
     @Getter

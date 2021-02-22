@@ -1,38 +1,71 @@
 package es.inditex.prices.interfaces.rest;
 
+import es.inditex.prices.interfaces.facade.ProductPriceServiceFacade;
 import es.inditex.prices.interfaces.facade.dto.PriceDTO;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 public class ProductPriceControllerTest {
     @Autowired
-    private ProductPriceController controller;
+    private MockMvc mockMvc;
 
-    static Stream<Arguments> testParameterProvisioner() {
-        return Stream.of(
-                arguments(1, 35455, LocalDateTime.of(2020, Month.JUNE, 14, 10, 0, 0), 1),
-                arguments(1, 35455, LocalDateTime.of(2020, Month.JUNE, 14, 16, 0, 0), 2),
-                arguments(1, 35455, LocalDateTime.of(2020, Month.JUNE, 14, 21, 0, 0), 1),
-                arguments(1, 35455, LocalDateTime.of(2020, Month.JUNE, 15, 10, 0, 0), 3),
-                arguments(1, 35455, LocalDateTime.of(2020, Month.JUNE, 16, 21, 0, 0), 4)
-        );
+    @MockBean
+    private ProductPriceServiceFacade service;
+
+    @Test
+    void whenRequestParametersOk_thenShouldReturnCorrectResponse() throws Exception {
+        // arrange
+        LocalDateTime time = LocalDateTime.of(2020, 1, 1, 1, 0, 0);
+        PriceDTO price = new PriceDTO(1L, 1L, 1L, time, time, BigDecimal.TEN, "EUR");
+        when(service.getProductPriceForDate(anyLong(), anyLong(), any(LocalDateTime.class)))
+                .thenReturn(price);
+        // act and assert
+        mockMvc.perform(get("/prices/1/1").queryParam("date", "2020-06-15T21:00:00"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(
+                        "{\"brand\":1,\"product\":1,\"priceList\":1,\"from\":\"2020-01-01T01:00:00\",\"to\":\"2020-01-01T01:00:00\",\"price\":10,\"currency\":\"EUR\"}")))
+                .andDo(print());
     }
 
-    @ParameterizedTest
-    @MethodSource("testParameterProvisioner")
-    public void whenGetProductPrice_thenShouldReturnExpectedProductPrice(long brand, long product, LocalDateTime date, long expectedPriceList) {
-        PriceDTO price = controller.getProductPrice(brand, product, date);
-        assertEquals(price.getPriceList(), expectedPriceList);
+    @Test
+    void whenRequestPriceNotFound_thenShouldReturnNotFound() throws Exception {
+        // arrange
+        when(service.getProductPriceForDate(anyLong(), anyLong(), any(LocalDateTime.class)))
+                .thenThrow(ProductPriceNotFoundException.class);
+        // act and assert
+        mockMvc.perform(get("/prices/1/1").queryParam("date", "2020-06-15T21:00:00"))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
+    void whenRequestParametersNOk_thenShouldReturnError() throws Exception {
+        // arrange
+        LocalDateTime time = LocalDateTime.of(2020, 1, 1, 1, 0, 0);
+        PriceDTO price = new PriceDTO(1L, 1L, 1L, time, time, BigDecimal.TEN, "EUR");
+        when(service.getProductPriceForDate(anyLong(), anyLong(), any(LocalDateTime.class)))
+                .thenReturn(price);
+        // act and assert
+        mockMvc.perform(get("/prices/1/1").queryParam("date", "wrong date"))
+                .andExpect(status().is4xxClientError())
+                .andDo(print());
     }
 }
