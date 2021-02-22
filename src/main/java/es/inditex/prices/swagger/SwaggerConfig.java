@@ -23,8 +23,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("es.inditex.prices.interfaces.rest"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(getApiInfo())
-                ;
+                .apiInfo(getApiInfo());
     }
 
     private ApiInfo getApiInfo() {
