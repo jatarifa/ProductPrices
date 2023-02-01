@@ -38,7 +38,7 @@ Go to the project root directory and execute the following command to compile an
 ./mvnw clean verify
 ```
 
-After creating all artifacts you can run the project with the following command:
+After testing and verifying the project you can run the project with the following command:
 
 ```shell
 ./mvnw spring-boot:run
