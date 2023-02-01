@@ -4,7 +4,7 @@ Spring-boot REST microservice maven project to illustrate how to structure an he
 
 ## ⚙️ Requirements
 
-- JDK8.
+- JDK8+.
 
 ## 📘 Technologies
 
